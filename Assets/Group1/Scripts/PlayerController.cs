@@ -22,17 +22,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.W))
-            Move(0f, _speed * Time.deltaTime);
+        var offset = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 
-        if (Input.GetKey(KeyCode.S))
-            Move(0f, -_speed * Time.deltaTime);
-
-        if (Input.GetKey(KeyCode.A))
-            Move(-_speed * Time.deltaTime);
-
-        if (Input.GetKey(KeyCode.D))
-            Move(_speed * Time.deltaTime);
+        transform.Translate(offset * _speed * Time.deltaTime);
     }
 
     public void IncreaseSpeed()
@@ -43,11 +35,6 @@ public class PlayerController : MonoBehaviour
         _time = _timeValue;
 
         PlayTime();
-    }
-
-    private void Move(float x, float y = 0, float z = 0)
-    {
-        transform.Translate(x, y, z);
     }
 
     private IEnumerator WaitForSeconds()
